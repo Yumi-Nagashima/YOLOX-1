@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 # Copyright (c) Megvii, Inc. and its affiliates.
-
+#demo.pyの中身に書き込みましょう。
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import argparse
 import os
 import time

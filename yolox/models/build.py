@@ -47,7 +47,7 @@ def create_yolox_model(name: str, pretrained: bool = True, num_classes: int = 80
     Returns:
         YOLOX model (nn.Module)
     """
-    from yolox.exp import get_exp, Exp
+    from yolox.exp import Exp, get_exp
 
     if device is None:
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
@@ -59,7 +59,7 @@ def create_yolox_model(name: str, pretrained: bool = True, num_classes: int = 80
         exp: Exp = get_exp(exp_name=name)
         exp.num_classes = num_classes
         yolox_model = exp.get_model()
-        if pretrained and num_classes == 80:
+        if pretrained and num_classes == 1:
             weights_url = _CKPT_FULL_PATH[name]
             ckpt = load_state_dict_from_url(weights_url, map_location="cpu")
             if "model" in ckpt:

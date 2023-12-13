@@ -2,13 +2,6 @@
 # -*- coding:utf-8 -*-
 # Copyright (c) Megvii, Inc. and its affiliates.
 
-import contextlib
-import io
-import itertools
-import json
-import tempfile
-import time
-from collections import ChainMap, defaultdict
 from loguru import logger
 from tabulate import tabulate
 from tqdm import tqdm
@@ -26,6 +19,14 @@ from yolox.utils import (
     time_synchronized,
     xyxy2xywh
 )
+
+import contextlib
+import io
+import itertools
+import json
+import tempfile
+import time
+from collections import ChainMap, defaultdict
 
 
 def per_class_AR_table(coco_eval, class_names=COCO_CLASSES, headers=["class", "AR"], colums=6):
@@ -291,7 +292,8 @@ class COCOEvaluator:
                 json.dump(data_dict, open(tmp, "w"))
                 cocoDt = cocoGt.loadRes(tmp)
             try:
-                from yolox.layers import COCOeval_opt as COCOeval
+                # from yolox.layers import COCOeval_opt as COCOeval
+                from pycocotools.cocoeval import COCOeval
             except ImportError:
                 from pycocotools.cocoeval import COCOeval
 
